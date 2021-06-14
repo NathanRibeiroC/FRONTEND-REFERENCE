@@ -1627,6 +1627,46 @@ export default Login;
 
 ## Make requests
 
+## Avoiding bugs when fetching
+
+When using external state inside function that is fetching data and being used on useEffect
+good practice is using useCallback
+
+```javascript
+  const fetchMoviesHandler = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await fetch('https://react-http-6b4a6.firebaseio.com/movies.json');
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+
+      const data = await response.json();
+
+      const loadedMovies = [];
+
+      for (const key in data) {
+        loadedMovies.push({
+          id: key,
+          title: data[key].title,
+          openingText: data[key].openingText,
+          releaseDate: data[key].releaseDate,
+        });
+      }
+
+      setMovies(loadedMovies);
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    fetchMoviesHandler();
+  }, [fetchMoviesHandler]);
+```
+
 ### Database Interaction
 
 Web app should never interact directly with database, because it is quite insecure. It would expose
@@ -2333,6 +2373,10 @@ print(add5(2));  // 7
 print(add10(2)); // 12
 ```
 
+## CUSTOM HOOKS
+
+Unlike "regular functions", custom hooks can use other React hooks and React state.
+
 ## RULES OF HOOKS
 
 <ul>
@@ -2341,6 +2385,13 @@ print(add10(2)); // 12
   <li>Only call React Hooks at the Top Level (don't call them in nested functions [inside other hook], don't call them in any block statements [if])</li>
   <li>On useEffect() every data that is coming from inside the component must be added as dependency</li>
 </ul>
+
+## FORMS
+
+  ### VALIDATING FORMS
+  1- When form is submited
+  2- When a input is losing focus
+  3- On every keystroke
 
 ## STATE
 
@@ -2370,6 +2421,16 @@ function setState(){
 
 Elegant way to unpack value from a prop
 
+## DEPLOYMENT STEPS
+  1-test code
+  2-optimize code (react.memo, lazy loading)
+  3-build app for production
+  4-upload production code to server
+  5-configure server
+
+### LAZY LOADING
+
+  Divide your code in chuncks in order it can be dowloaded as it is necessary. Easier to use when you use react router to do different pages.
 
 ## SETUP ENVIRONMENT
 
