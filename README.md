@@ -520,7 +520,7 @@ This form has the default HTML form behavior of browsing to a new page when the 
 
 <b>Controled Components</b>
 
-In HTML, form elements such as <input>, <textarea>, and <select> typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with setState().
+In HTML, form elements such as `<input>`, `<textarea>`, and `<select>` typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with setState().
 
 We can combine the two by making the React state be the <b>single source of truth</b>. Then the React component that renders a form also controls what happens in that form on subsequent user input. An input form element whose value is controlled by React in this way is called a controlled component.
 
@@ -566,6 +566,7 @@ The textarea Tag
   Hello there, this is some text in a text area
 </textarea>
 ```
+
 
 ```javascript
 class EssayForm extends React.Component {
