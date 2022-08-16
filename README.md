@@ -83,7 +83,7 @@ class Clock extends React.Component {
 }
 ```
 
-<b>Adding  Local State to a Class</b>
+<h2>Adding  Local State to a Class</h2>
 
 We will move the date from props to state in three steps
 
@@ -131,7 +131,7 @@ Class components should always call the base constructor with props.
 root.render(<Clock />);
 ```
 
-<b>Adding lifecycle methods to a class</b>
+<h2>Adding lifecycle methods to a class</h2>
 
 In applications with many components, it’s very important to free up resources taken by the components when they are destroyed.
 
@@ -231,7 +231,7 @@ root.render(<Clock />);
 
 The only place where you can assign this.state is the constructor.
 
-<b>Set State Updates May Be Asynchronous</b>
+<h2>Set State Updates May Be Asynchronous</h2>
 
 React may batch multiple setState() calls into a single update for performance.
 
@@ -260,15 +260,15 @@ this.setState(function(state, props) {
 });
 ```
 
-<b>State Updates are Merged</b>
+<h2>State Updates are Merged</h2>
 
 When you call setState(), React merges the object you provide into the current state.
 
-<b>The Data Flows Down</b>
+<h2>The Data Flows Down</h2>
 
 This is commonly called a “top-down” or “unidirectional” data flow. Any state is always owned by some specific component, and any data or UI derived from that state can only affect components “below” them in the tree.
 
-<b>Handling Events</b>
+<h2>Handling Events</h2>
 
 React events are named using camelCase, rather than lowercase. For example:
 
@@ -355,7 +355,7 @@ class LoggingButton extends React.Component {
 
 The problem with this syntax is that a different callback is created each time the LoggingButton renders. In most cases, this is fine. However, if this callback is passed as a prop to lower components, those components might do an extra re-rendering. <b>We generally recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem.</b>
 
-<b>Passing Arguments to Event Handlers</b>
+<h2>Passing Arguments to Event Handlers</h2>
 
 Inside a loop, it is common to want to pass an extra parameter to an event handler. For example, if id is the row ID, either of the following would work:
 
@@ -368,7 +368,7 @@ The above two lines are equivalent, and use arrow functions and Function.prototy
 
 In both cases, the e argument representing the React event will be passed as a second argument after the ID. With an arrow function, we have to pass it explicitly, but with bind any further arguments are automatically forwarded.
 
-<b>Conditional Rendering</b>
+<h2>Conditional Rendering</h2>
 
 ```javascript
 class LoginControl extends React.Component {
@@ -431,7 +431,7 @@ Just like in JavaScript, it is up to you to choose an appropriate style based on
 <b>VERY GOOD TIP:
 Also remember that whenever conditions become too complex, it might be a good time to extract a component.</b>
 
-<b>Preventing Component from Rendering</b>
+<h2>Preventing Component from Rendering</h2>
 
 In rare cases you might want a component to hide itself even though it was rendered by another component. To do this return null instead of its render output.
 
@@ -479,13 +479,13 @@ root.render(<Page />);
 
 Returning null from a component’s render method does not affect the firing of the component’s lifecycle methods. For instance componentDidUpdate will still be called.
 
-<b>Keys</b>
+<h2>Keys</h2>
 
 Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity:
 
 We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state.
 
-<b>Keys Must Only Be Unique Among Siblings</b>
+<h3>Keys Must Only Be Unique Among Siblings</h3>
 
 Keys used within arrays should be unique among their siblings. However, they don’t need to be globally unique. We can use the same keys when we produce two different arrays:
 
@@ -502,7 +502,7 @@ const content = posts.map((post) =>
 
 With the example above, the Post component can read props.id, but not props.key.
 
-<b>Forms</b>
+<h2>Forms</h2>
 
 HTML form elements work a bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:
 
@@ -518,7 +518,7 @@ HTML form elements work a bit differently from other DOM elements in React, beca
 
 This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it’s convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called “controlled components”.
 
-<b>Controled Components</b>
+<h2>Controled Components</h2>
 
 In HTML, form elements such as `<input>`, `<textarea>`, and `<select>` typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with setState().
 
@@ -557,7 +557,7 @@ class NameForm extends React.Component {
 }
 ```
 
-<b>The textarea Tag</b>
+<h2>The textarea Tag</h2>
 
 The textarea Tag
 
@@ -603,7 +603,7 @@ class EssayForm extends React.Component {
 }
 ```
 
-<b>The file input Tag</b>
+<h2>The file input Tag</h2>
 
 In HTML, an `<input type="file">` lets the user choose one or more files from their device storage to be uploaded to a server or manipulated by JavaScript via the File API.
 
@@ -677,7 +677,7 @@ Also, since setState() automatically <b>merges a partial state into the current 
 
 HINT: FORMIK
 
-<b>Lifting State Up</b>
+<h2>Lifting State Up</h2>
 
 ```javascript
 class TemperatureInput extends React.Component {
@@ -745,7 +745,7 @@ class Calculator extends React.Component {
 }
 ```
 
-<b>Very Important Concepts</b>
+<h2>Very Important Concepts</h2>
 
 There should be a <b>single “source of truth”</b> for any data that changes in a React application. Usually, the state is first added to the component that needs it for rendering. Then, if other components also need it, you can lift it up to their closest common ancestor. Instead of trying to sync the state between different components, you should rely on the top-down data flow.
 
@@ -753,7 +753,7 @@ Lifting state involves writing more “boilerplate” code than two-way binding 
 
 If something can be derived from either props or state, it probably shouldn’t be in the state.
 
-<b>Composition vs Inheritance</b>
+<h2>Composition vs Inheritance</h2>
 
 React has a powerful composition model, and it is recommended <b>using composition instead of inheritance</b> to reuse code between components.
 
