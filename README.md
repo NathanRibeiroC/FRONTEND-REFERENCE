@@ -604,7 +604,7 @@ class EssayForm extends React.Component {
 
 <b>The file input Tag</b>
 
-In HTML, an <input type="file"> lets the user choose one or more files from their device storage to be uploaded to a server or manipulated by JavaScript via the File API.
+In HTML, an `<input type="file">` lets the user choose one or more files from their device storage to be uploaded to a server or manipulated by JavaScript via the File API.
 
 ```html
 <input type="file" />
