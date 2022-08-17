@@ -1,13 +1,14 @@
 # REACT-REFERENCE
 This repository is a personal reference for React concepts and snippets of code that are used daily.
 
-:pencil: SUMMARY :pencil:
+:pencil: 
+<h2>SUMMARY</h2>
 
 <ul>
   <li>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</li>
 </ul>
 
-<h1>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</h1>
+<h2>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</h2>
 
 React elements are immutable. Once you create an element, you can’t change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time.
 
