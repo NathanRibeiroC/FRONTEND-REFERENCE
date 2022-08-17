@@ -2,11 +2,12 @@
 This repository is a personal reference for React concepts and snippets of code that are used daily.
 
 :round_pushpin: <h1>SUMMARY<h1>
+
 <ul>
   <li>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</li>
 </ul>
 
-<title>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</title>
+<h1>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</h1>
 
 React elements are immutable. Once you create an element, you can’t change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time.
 
