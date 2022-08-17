@@ -1,7 +1,10 @@
 # REACT-REFERENCE
 This repository is a personal reference for React concepts and snippets of code that are used daily.
 
-:pencil: 
+<h4 align="center"> 
+	References :pencil2:
+</h4>
+
 <h2>SUMMARY</h2>
 
 <ul>
