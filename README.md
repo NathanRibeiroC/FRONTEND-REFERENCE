@@ -5,6 +5,10 @@ This repository is a personal reference for React concepts and snippets of code 
 	References :pencil2:
 </h4>
 
+<p align="center">
+ <a href="https://reactjs.org/docs/composition-vs-inheritance.html">React Oficial Docummentation</a> •
+</p>
+
 <h2>SUMMARY</h2>
 
 <ul>
