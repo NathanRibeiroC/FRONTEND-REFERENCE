@@ -912,6 +912,26 @@ Extensions
 
 ### Step 1: Break The UI Into A Component Hierarchy
 
+The first thing you’ll want to do is to draw boxes around every component (and subcomponent) in the mock and give them all names.
+
+But how do you know what should be its own component? Use the same techniques for deciding if you should create a new function or object. One such technique is the single responsibility principle, that is, a component should ideally only do one thing. If it ends up growing, it should be decomposed into smaller subcomponents.
+
+Since you’re often displaying a JSON data model to a user, you’ll find that if your model was built correctly, your UI (and therefore your component structure) will map nicely. That’s because <b>UI and data models tend to adhere to the same information architecture</b>. Separate your UI into components, where each component matches one piece of your data model.
+
+Now that we’ve identified the components in our mock, let’s arrange them into a hierarchy. Components that appear within another component in the mock should appear as a child in the hierarchy:
+
+<ul>
+  <li>FilterableProductTable</li>
+  <ul>
+    <li>SearchBar</li>
+    <li>ProductTable</li>
+    <ul>
+      <li>ProductCategoryRow</li>
+      <li>ProductRow</li>
+    </ul>
+  </ul>
+</ul>
+
 ### Step 2: Build A Static Version in React
 
 ### Step 3: Identify The Minimal (but complete) Representation Of UI State
