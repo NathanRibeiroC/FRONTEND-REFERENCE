@@ -1,12 +1,12 @@
 # REACT-REFERENCE
 This repository is a personal reference for React concepts and snippets of code that are used daily.
 
-:page_facing_up: - SUMMARY
+:round_pushpin: <h1>SUMMARY<h1>
 <ul>
   <li>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</li>
 </ul>
 
-<h1>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</h1>
+<title>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</title>
 
 React elements are immutable. Once you create an element, you can’t change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time.
 
@@ -757,7 +757,7 @@ If something can be derived from either props or state, it probably shouldn’t 
 
 React has a powerful composition model, and it is recommended <b>using composition instead of inheritance</b> to reuse code between components.
 
-<h2>Containment</h2>
+<h3>Containment</h3>
 
 Some components don’t know their children ahead of time. This is especially common for components like Sidebar or Dialog that represent generic “boxes”.
 
