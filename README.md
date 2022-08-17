@@ -11,10 +11,8 @@ This repository is a personal reference for React concepts and snippets of code 
 
 ## SUMMARY
 
-<ul>
-  <li>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</li>
-  <li>[MAIN DOCUMENTATION CONCEPTS CLASS COMPONENTS](#main-documentation-concepts-class-components)</li>
-</ul>
+  - [MAIN DOCUMENTATION CONCEPTS CLASS COMPONENTS](#main-documentation-concepts-class-components)
+
 
 ## MAIN DOCUMENTATION CONCEPTS CLASS COMPONENTS
 
