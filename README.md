@@ -13,10 +13,10 @@ This repository is a personal reference for React concepts and snippets of code 
 
 <ul>
   <li>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</li>
-  <li>[MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)](main-documentation-concepts-(class-components))</li>
+  <li>[MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)](main-documentation-concepts-class-components)</li>
 </ul>
 
-## MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)
+## MAIN DOCUMENTATION CONCEPTS CLASS COMPONENTS
 
 React elements are immutable. Once you create an element, you can’t change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time.
 
