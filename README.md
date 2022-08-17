@@ -9,13 +9,13 @@ This repository is a personal reference for React concepts and snippets of code 
  <a href="https://reactjs.org/docs/composition-vs-inheritance.html">React Oficial Docummentation</a>
 </p>
 
-<h2>SUMMARY</h2>
+##SUMMARY
 
 <ul>
   <li>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</li>
 </ul>
 
-<h2>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</h2>
+##MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)
 
 React elements are immutable. Once you create an element, you can’t change its children or attributes. An element is like a single frame in a movie: it represents the UI at a certain point in time.
 
@@ -85,14 +85,14 @@ class Clock extends React.Component {
     return (
       <div>
         <h1>Hello, world!</h1>
-        <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+        ##It is {this.props.date.toLocaleTimeString()}.
       </div>
     );
   }
 }
 ```
 
-<h2>Adding  Local State to a Class</h2>
+##Adding  Local State to a Class
 
 We will move the date from props to state in three steps
 
@@ -105,7 +105,7 @@ class Clock extends React.Component {
       <div>
         <h1>Hello, world!</h1>
 
-       <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+       ##It is {this.state.date.toLocaleTimeString()}.
      </div>
     );
   }
@@ -125,7 +125,7 @@ class Clock extends React.Component {
     return (
       <div>
         <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        ##It is {this.state.date.toLocaleTimeString()}.
       </div>
     );
   }
@@ -140,7 +140,7 @@ Class components should always call the base constructor with props.
 root.render(<Clock />);
 ```
 
-<h2>Adding lifecycle methods to a class</h2>
+##Adding lifecycle methods to a class
 
 In applications with many components, it’s very important to free up resources taken by the components when they are destroyed.
 
@@ -169,7 +169,7 @@ class Clock extends React.Component {
     return (
       <div>
         <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        ##It is {this.state.date.toLocaleTimeString()}.
       </div>
     );
   }
@@ -228,7 +228,7 @@ class Clock extends React.Component {
     return (
       <div>
         <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        ##It is {this.state.date.toLocaleTimeString()}.
       </div>
     );
   }
@@ -240,7 +240,7 @@ root.render(<Clock />);
 
 The only place where you can assign this.state is the constructor.
 
-<h2>Set State Updates May Be Asynchronous</h2>
+##Set State Updates May Be Asynchronous
 
 React may batch multiple setState() calls into a single update for performance.
 
@@ -269,15 +269,15 @@ this.setState(function(state, props) {
 });
 ```
 
-<h2>State Updates are Merged</h2>
+##State Updates are Merged
 
 When you call setState(), React merges the object you provide into the current state.
 
-<h2>The Data Flows Down</h2>
+##The Data Flows Down
 
 This is commonly called a “top-down” or “unidirectional” data flow. Any state is always owned by some specific component, and any data or UI derived from that state can only affect components “below” them in the tree.
 
-<h2>Handling Events</h2>
+##Handling Events
 
 React events are named using camelCase, rather than lowercase. For example:
 
@@ -364,7 +364,7 @@ class LoggingButton extends React.Component {
 
 The problem with this syntax is that a different callback is created each time the LoggingButton renders. In most cases, this is fine. However, if this callback is passed as a prop to lower components, those components might do an extra re-rendering. <b>We generally recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem.</b>
 
-<h2>Passing Arguments to Event Handlers</h2>
+##Passing Arguments to Event Handlers
 
 Inside a loop, it is common to want to pass an extra parameter to an event handler. For example, if id is the row ID, either of the following would work:
 
@@ -377,7 +377,7 @@ The above two lines are equivalent, and use arrow functions and Function.prototy
 
 In both cases, the e argument representing the React event will be passed as a second argument after the ID. With an arrow function, we have to pass it explicitly, but with bind any further arguments are automatically forwarded.
 
-<h2>Conditional Rendering</h2>
+##Conditional Rendering
 
 ```javascript
 class LoginControl extends React.Component {
@@ -440,7 +440,7 @@ Just like in JavaScript, it is up to you to choose an appropriate style based on
 <b>VERY GOOD TIP:
 Also remember that whenever conditions become too complex, it might be a good time to extract a component.</b>
 
-<h2>Preventing Component from Rendering</h2>
+##Preventing Component from Rendering
 
 In rare cases you might want a component to hide itself even though it was rendered by another component. To do this return null instead of its render output.
 
@@ -488,7 +488,7 @@ root.render(<Page />);
 
 Returning null from a component’s render method does not affect the firing of the component’s lifecycle methods. For instance componentDidUpdate will still be called.
 
-<h2>Keys</h2>
+##Keys
 
 Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity:
 
@@ -511,7 +511,7 @@ const content = posts.map((post) =>
 
 With the example above, the Post component can read props.id, but not props.key.
 
-<h2>Forms</h2>
+##Forms
 
 HTML form elements work a bit differently from other DOM elements in React, because form elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:
 
@@ -527,7 +527,7 @@ HTML form elements work a bit differently from other DOM elements in React, beca
 
 This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it’s convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called “controlled components”.
 
-<h2>Controled Components</h2>
+##Controled Components
 
 In HTML, form elements such as `<input>`, `<textarea>`, and `<select>` typically maintain their own state and update it based on user input. In React, mutable state is typically kept in the state property of components, and only updated with setState().
 
@@ -566,7 +566,7 @@ class NameForm extends React.Component {
 }
 ```
 
-<h2>The textarea Tag</h2>
+##The textarea Tag
 
 The textarea Tag
 
@@ -612,7 +612,7 @@ class EssayForm extends React.Component {
 }
 ```
 
-<h2>The file input Tag</h2>
+##The file input Tag
 
 In HTML, an `<input type="file">` lets the user choose one or more files from their device storage to be uploaded to a server or manipulated by JavaScript via the File API.
 
@@ -686,7 +686,7 @@ Also, since setState() automatically <b>merges a partial state into the current 
 
 HINT: FORMIK
 
-<h2>Lifting State Up</h2>
+##Lifting State Up
 
 ```javascript
 class TemperatureInput extends React.Component {
@@ -754,7 +754,7 @@ class Calculator extends React.Component {
 }
 ```
 
-<h2>Very Important Concepts</h2>
+##Very Important Concepts
 
 There should be a <b>single “source of truth”</b> for any data that changes in a React application. Usually, the state is first added to the component that needs it for rendering. Then, if other components also need it, you can lift it up to their closest common ancestor. Instead of trying to sync the state between different components, you should rely on the top-down data flow.
 
@@ -762,7 +762,7 @@ Lifting state involves writing more “boilerplate” code than two-way binding 
 
 If something can be derived from either props or state, it probably shouldn’t be in the state.
 
-<h2>Composition vs Inheritance</h2>
+##Composition vs Inheritance
 
 React has a powerful composition model, and it is recommended <b>using composition instead of inheritance</b> to reuse code between components.
 
