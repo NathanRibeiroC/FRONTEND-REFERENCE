@@ -1,7 +1,7 @@
 # REACT-REFERENCE
 This repository is a personal reference for React concepts and snippets of code that are used daily.
 
-:round_pushpin: SUMMARY
+:pencil: SUMMARY :pencil:
 
 <ul>
   <li>MAIN DOCUMENTATION CONCEPTS (CLASS COMPONENTS)</li>
