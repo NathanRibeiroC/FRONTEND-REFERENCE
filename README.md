@@ -972,10 +972,6 @@ Let’s go through each one and figure out which one is state. Ask three questio
 
 ### Step 5: Add Inverse Data Flow
 
-<ul>
-<li>React Developer Tools</li>
-</ul>
-
 ## AUTHENTICATION
 
 Lock API endpoints and content that should be private.
