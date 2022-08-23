@@ -982,7 +982,7 @@ Two-step process:
 2 - Send request to protected resource
 
 Client --> Request (with user credentials) --> Server
-       <--         Response (Yes/No)       <--
+<--         Response (Yes/No)       <--
 
 Is that enough ?
 
