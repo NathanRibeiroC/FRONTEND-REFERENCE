@@ -970,7 +970,12 @@ Let’s go through each one and figure out which one is state. Ask three questio
 
 ### Step 4: Identify Where Your State Should Live
 
+dasdads
+
 ### Step 5: Add Inverse Data Flow
+a
+d
+as
 
 ## AUTHENTICATION
 
