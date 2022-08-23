@@ -12,6 +12,7 @@ This repository is a personal reference for React concepts and snippets of code 
 ## SUMMARY
 
   - [MAIN DOCUMENTATION CONCEPTS CLASS COMPONENTS](#main-documentation-concepts-class-components)
+  - [AUTHENTICATION](#authentication)
 
 
 ## MAIN DOCUMENTATION CONCEPTS CLASS COMPONENTS
@@ -775,7 +776,7 @@ We recommend that such components use the special children prop to pass children
 function FancyBorder(props) {
   return (
     <div className={'FancyBorder FancyBorder-' + props.color}>
-      {props.children}
+      {props.children} //can pass entirely markup code through this
     </div>
   );
 }
@@ -974,3 +975,69 @@ Let’s go through each one and figure out which one is state. Ask three questio
 <ul>
 <li>React Developer Tools</li>
 </ul>
+
+## AUTHENTICATION
+
+Lock API endpoints and content that should be private.
+
+Two-step process:
+
+1 - Get access / permission
+2 - Send request to protected resource
+
+Client --> Request (with user credentials) --> Server
+       <--         Response (Yes/No)       <--
+
+Is that enough ?
+
+A "yes" alone is not enough to then access protected resources (API endpoints). Because a "yes" or "no" is very easy to fake.
+
+There are two approaches
+<ul>
+  <li>Server-side sessions</li>
+  <ul>
+    <li>Store unique identifier on server, send same identifier to client (use on requests)</li>
+    <li>It is only good when front end and backend are tighly coupled otherwise, if frontend is deployed on server A (single-page application)and API on server B, it is not good idea</li>
+  </ul>
+  <li>Authentication Tokens</li>
+  <ul>
+    <li>Create (but not store) "permission" token on server, send token to client</li>
+    <li>Client sends token along with requests to protect resources</li>
+    <li>Good for threating decoupled frontend and backend</li>
+  </ul>
+</ul>
+
+## CAREFULL
+
+Be carefull with copying <b>objects and arrays</b> to const or variables, because the reference keeps so it can generate unexpected behaviors on React code
+
+```javascript
+const person = {
+  name: 'Max'
+}
+
+const secondPerson = person;
+
+person.name = 'Manu';
+
+console.log(secondPerson); // Manu
+```
+
+Right way of doing that.
+
+```javascript
+const person = {
+  name: 'Max'
+}
+
+const secondPerson = {
+  ...person //keeps all properties
+};
+
+person.name = 'Manu';
+
+console.log(secondPerson); // Max
+```
+
+## BROWSER
+
