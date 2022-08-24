@@ -970,12 +970,7 @@ Let’s go through each one and figure out which one is state. Ask three questio
 
 ### Step 4: Identify Where Your State Should Live
 
-dasdads
-
 ### Step 5: Add Inverse Data Flow
-a
-d
-as
 
 ## AUTHENTICATION
 
@@ -1042,3 +1037,178 @@ console.log(secondPerson); // Max
 
 ## BROWSER
 
+## JS tips
+
+Can use trim to dicart blank spaces.
+
+```javascript
+  if(enteredValue.trim().length){
+
+  }
+
+  if(event.target.valuetrim().length > 0){
+    setIsValid(true)
+  }
+```
+
+## CSS ALTERNATIVES
+
+<ul>
+  <li>Styled Components</li>
+  <li>CSS Modules Stylesheet</li>
+</ul>
+
+## STYLED COMPONENTS
+
+```javascript
+import styled from 'styled-components';
+
+const Button = styled.button`
+.button
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #8b005d;
+  color: white;
+  background: #8b005d;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
+  cursor: pointer;
+
+
+&:focus
+  outline: none;
+
+&:hover,
+&:active
+  background: #ac0e77;
+  border-color: #ac0e77;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
+`;
+
+// const Button = props => {
+//   return (
+//     <button type={props.type} className="button" onClick={props.onClick}>
+//       {props.children}
+//     </button>
+//   );
+// };
+
+export default Button;
+```
+
+Another example:
+
+```javascript
+import React, { useState } from "react";
+import styled from "styled-components";
+
+import Button from "../../UI/Button/Button";
+import "./CourseInput.css";
+
+const FormControl = styled.div`
+  margin: 0.5rem 0;
+
+  & label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: ${props => props.invalid ? 'red' : 'black'};
+  }
+
+  & input {
+    display: block;
+    width: 100%;
+    border: 1px solid ${props => props.invalid ? 'red' : '#ccc'};
+    background: ${props => props.invalid ? '#fad0ec' : 'transparent'};
+    font: inherit;
+    line-height: 1.5rem;
+    padding: 0 0.25rem;
+  }
+
+  & input:focus {
+    outline: none;
+    background: #fad0ec;
+    border-color: #8b005d;
+  }
+`;
+
+const CourseInput = (props) => {
+  const [enteredValue, setEnteredValue] = useState("");
+  const [isValid, setIsValid] = useState(true);
+
+  const goalInputChangeHandler = (event) => {
+    if (event.target.value.trim().length > 0) {
+      setIsValid(true);
+    }
+    setEnteredValue(event.target.value);
+  };
+
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    if (enteredValue.trim().length === 0) {
+      setIsValid(false);
+      return;
+    }
+    props.onAddGoal(enteredValue);
+  };
+
+  return (
+    <form onSubmit={formSubmitHandler}>
+      <FormControl invalid={!isValid}>
+        <label>Course Goal</label>
+        <input type="text" onChange={goalInputChangeHandler} />
+      </FormControl>
+      <Button type="submit">Add Goal</Button>
+    </form>
+  );
+};
+
+export default CourseInput;
+```
+
+## CSS MODULES STYLESHEET
+
+Generates unique DOM class names
+
+```css
+/*
+FILE NAME: Button.module.css
+*/
+
+.button {
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #8b005d;
+  color: white;
+  background: #8b005d;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.26);
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:hover,
+.button:active {
+  background: #ac0e77;
+  border-color: #ac0e77;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
+}
+```
+
+```javascript
+import React from 'react';
+import styles from './Button.module.css'
+
+const Button = props => {
+  return (
+    <button type={props.type} className={styles.button} onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
+};
+
+export default Button;
+```
+
+## DEBUGGING
