@@ -13,6 +13,7 @@ This repository is a personal reference for React concepts and snippets of code 
 
   - [MAIN DOCUMENTATION CONCEPTS CLASS COMPONENTS](#main-documentation-concepts-class-components)
   - [AUTHENTICATION](#authentication)
+  - [SETUP-ENVIRONMENT](#setup-environment)
 
 
 ## MAIN DOCUMENTATION CONCEPTS CLASS COMPONENTS
