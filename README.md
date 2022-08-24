@@ -1212,3 +1212,10 @@ export default Button;
 ```
 
 ## DEBUGGING
+
+## SETUP ENVIRONMENT
+
+<ul>
+  <li><a href="https://github.com/yuk7/ArchWSL">ArchWSL</a></li>
+  <li><a href="https://githubcomLeDragoXWin-Debloat-Tools">Win-Debloat-Tools<a></li>
+</ul>
