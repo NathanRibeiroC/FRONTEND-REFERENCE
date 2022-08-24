@@ -6,7 +6,7 @@ This repository is a personal reference for React concepts and snippets of code 
 </h4>
 
 <p align="center">
- <a href="https://reactjs.org/docs/composition-vs-inheritance.html">React Oficial Docummentation</a>
+ <a href="https://reactjs.org/docs/composition-vs-inheritance.html">React Oficial Docummentation</a> •
  <a href="https://www.youtube.com/watch?v=sjrW74Hx5Po&t=811s&ab_channel=FabioAkita">Setup Configuration</a>
 </p>
 
