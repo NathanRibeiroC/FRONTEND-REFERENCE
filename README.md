@@ -966,11 +966,11 @@ Let’s go through each one and figure out which one is state. Ask three questio
   <li>Is it passed in from a parent via props? If so, it probably isn’t state.</li>
   <li>Does it remain unchanged over time? If so, it probably isn’t state.</li>
   <li>Can you compute it based on any other state or props in your component? If so, it isn’t state.</li>
-<ol>
+</ol>
 
-<!-- ### Step 4: Identify Where Your State Should Live
+### Step 4: Identify Where Your State Should Live
 
-### Step 5: Add Inverse Data Flow -->
+### Step 5: Add Inverse Data Flow
 
 ## AUTHENTICATION
 
