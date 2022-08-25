@@ -1213,7 +1213,194 @@ const Button = props => {
 export default Button;
 ```
 
-## DEBUGGING
+## JSX
+
+You can't return more than one "root" jsx element because of course a return by default on javascript can only return a single value.
+
+Jsx code translates in:
+
+```javascript
+return{
+  React.createElement('h2',{},'Hi there!')
+}
+```
+
+## FRAGMENTS
+
+To avoid use of tons of unnecessary <div>, we can use a resource called fragment.
+
+```html
+<div>
+  <div>
+    <div>
+      <div>
+        <div>
+          <h2>Random content</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+That is basically a empty wrapper
+```javascript
+const Wrapper = props => {
+    return props.children;
+};
+
+export default Wrapper
+  ```
+
+```javascript
+  return(
+    <React.Fragment>
+      <h2>Hi there!</h2>
+      <p>Finish!</p>
+    </React.Fragment>
+  );
+  ```
+
+  ```javascript
+  return(
+    <>
+      <h2>Hi there!</h2>
+      <p>Finish!</p>
+    </>
+  );
+```
+
+## PORTAL
+
+TIP: RECOMMENDED TO USE TO MAKE MODALS
+
+Move your component to be rendered on another place inside the HTML DOM,
+it is possible to make a comparison to a portal:
+
+Example of error modal being rendered on the top of the DOM
+
+```javascript
+const Backdrop = (props) => {return (
+  <div className={classes.backdrop} onClick={props.onConfirm} />);
+};
+
+const ModalOverlay = (props) => {  return (
+  <Card className={classes.modal}>
+  <header className={classes.header}>
+    <h2>{props.title}</h2>
+  </header>
+  <div className={classes.content}>
+    <p>{props.message}</p>
+  </div>
+  <footer className={classes.actions}>
+    <Button onClick={props.onConfirm}>Okay</Button>
+  </footer>
+</Card>  );
+};
+
+const ErrorModal = (props) => {
+  return (
+    <React.Fragment>
+      {ReactDOM.createPortal(<Backdrop onConfirm={props.onConfirm}/>, document.getElementById('backdrop-root'))}
+      {ReactDOM.createPortal(<ModalOverlay title={props.title} message={props.message} onConfirm={props.onConfirm}/>, document.getElementById('overlay-root'))}
+    </React.Fragment>
+  );
+};
+
+export default ErrorModal;
+```
+
+Snippet of the Html DOM 
+
+```html
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="backdrop-root"></div>
+    <div id="overlay-root"></div>
+    <div id="root"></div>
+  </body>
+```
+## REF
+
+IMPORTANT: CAN ONLY BE USED INSIDE FUNCTIONAL COMPONENTS
+           CAN REF ANY HTML ELEMENT
+           IT IS NOT RECOMMENDED USING REF TO MANIPULATE THE DOM
+
+
+Connect variable with DOM element, will attribute to a variable an object
+that represents a DOM element.
+
+Look on the example below how we can change input value using `nameInputRef.current.value = '';`
+
+```javascript
+const AddUser = (props) => {
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
+  const [error, setError] = useState();
+
+  const addUserHandler = (event) => {
+    event.preventDefault();
+    console.log(nameInputRef.current.value)
+    const enteredName = nameInputRef.current.value;
+    const enteredUserAge = ageInputRef.current.value;
+    if (enteredName.trim().length === 0 || enteredUserAge.trim().length === 0) {
+      setError({
+        title: 'Invalid input',
+        message: 'Please enter a valid name and age (non-empty values).',
+      });
+      return;
+    }
+    if (+enteredUserAge < 1) {
+      setError({
+        title: 'Invalid age',
+        message: 'Please enter a valid age (> 0).',
+      });
+      return;
+    }
+    props.onAddUser(enteredName, enteredUserAge);
+    
+    nameInputRef.current.value = '';
+    ageInputRef.current.value = '';
+  };
+
+  const errorHandler = () => {
+    setError(null);
+  };
+
+  return (
+<Wrapper>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
+      <Card className={classes.input}>
+        <form onSubmit={addUserHandler}>
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            ref={nameInputRef}
+          />
+          <label htmlFor="age">Age (Years)</label>
+          <input
+            id="age"
+            type="number"
+            ref={ageInputRef}
+          />
+          <Button type="submit">Add User</Button>
+        </form>
+      </Card>
+</Wrapper>
+  );
+};
+
+export default AddUser;
+
+```
 
 ## SETUP ENVIRONMENT
 
