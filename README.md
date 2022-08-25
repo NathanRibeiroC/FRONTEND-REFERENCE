@@ -1325,7 +1325,7 @@ Snippet of the Html DOM
 IMPORTANT: CAN ONLY BE USED INSIDE FUNCTIONAL COMPONENTS
            CAN REF ANY HTML ELEMENT
            IT IS NOT RECOMMENDED USING REF TO MANIPULATE THE DOM
-
+           RECOMMEND TO READ VALUES, STATE CAN BE UNNECESSARY CODE MAYBE
 
 Connect variable with DOM element, will attribute to a variable an object
 that represents a DOM element.
