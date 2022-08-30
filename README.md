@@ -1402,6 +1402,182 @@ export default AddUser;
 
 ```
 
+## LOCAL STORAGE
+
+There is a way of natively using local storage in react `localStorage`. Very good example below about,
+how to maintain user logged after first login, after user access site again.
+
+```javascript
+import React, { useState, useEffect } from 'react';
+
+import Login from './components/Login/Login';
+import Home from './components/Home/Home';
+import MainHeader from './components/MainHeader/MainHeader';
+
+function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(()=>{
+    const storedUserLoggedInInformation = localStorage.getItem('isLoggedIn');
+
+    if(storedUserLoggedInInformation === '1'){
+      setIsLoggedIn(true);
+    }
+  },[]);
+
+  const loginHandler = (email, password) => {
+    // We should of course check email and password
+    // But it's just a dummy/ demo anyways
+    localStorage.setItem('isLoggedIn', '1');
+    setIsLoggedIn(true);
+  };
+
+  const logoutHandler = () => {
+    localStorage.removeItem('isLoggedIn');
+    setIsLoggedIn(false);
+  };
+
+  return (
+    <React.Fragment>
+      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <main>
+        {!isLoggedIn && <Login onLogin={loginHandler} />}
+        {isLoggedIn && <Home onLogout={logoutHandler} />}
+      </main>
+    </React.Fragment>
+  );
+}
+
+export default App;
+```
+
+## DEBOUNCE
+
+Calls a function after a first call only after a certein amount of time. It is ideal as an example if you want to send http
+requests. The code below contains an example about how to implement debouncing using useEffect:
+
+Attention to the clean up function 
+
+//IMPORTANT: clean up process, runs before user effect executes it's function next time, EXCEPT FOR THE FIRST TIME IT RUNS
+//and also important to say that it will run before the component unmounts from the DOM
+//clean ups timer
+
+```javascript
+import React, { useState, useEffect } from 'react';
+
+import Card from '../UI/Card/Card';
+import classes from './Login.module.css';
+import Button from '../UI/Button/Button';
+
+const Login = (props) => {
+  const [enteredEmail, setEnteredEmail] = useState('');
+  const [emailIsValid, setEmailIsValid] = useState();
+  const [enteredPassword, setEnteredPassword] = useState('');
+  const [passwordIsValid, setPasswordIsValid] = useState();
+  const [formIsValid, setFormIsValid] = useState(false);
+
+  useEffect(() => {
+    const identifier = setTimeout(()=>{
+      console.log('Checking form validity!');
+      setFormIsValid(
+        enteredEmail.includes('@') && enteredPassword.trim().length > 6
+      );
+    },500);
+    //IMPORTANT: clean up process, runs before user effect executes it's function next time, EXCEPT FOR THE FIRST TIME IT RUNS
+    //and also important to say that it will run before the component unmounts from the DOM
+    //clean ups timer
+    return () => {
+      console.log('clean up')
+      clearTimeout(identifier);
+    };
+  },[enteredEmail, enteredPassword])
+
+  const emailChangeHandler = (event) => {
+    setEnteredEmail(event.target.value);
+  };
+
+  const passwordChangeHandler = (event) => {
+    setEnteredPassword(event.target.value);
+
+    setFormIsValid(
+      event.target.value.trim().length > 6 && enteredEmail.includes('@')
+    );
+  };
+
+  const validateEmailHandler = () => {
+    setEmailIsValid(enteredEmail.includes('@'));
+  };
+
+  const validatePasswordHandler = () => {
+    setPasswordIsValid(enteredPassword.trim().length > 6);
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    props.onLogin(enteredEmail, enteredPassword);
+  };
+
+  return (
+    <Card className={classes.login}>
+      <form onSubmit={submitHandler}>
+        <div
+          className={`${classes.control} ${
+            emailIsValid === false ? classes.invalid : ''
+          }`}
+        >
+          <label htmlFor="email">E-Mail</label>
+          <input
+            type="email"
+            id="email"
+            value={enteredEmail}
+            onChange={emailChangeHandler}
+            onBlur={validateEmailHandler}
+          />
+        </div>
+        <div
+          className={`${classes.control} ${
+            passwordIsValid === false ? classes.invalid : ''
+          }`}
+        >
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={enteredPassword}
+            onChange={passwordChangeHandler}
+            onBlur={validatePasswordHandler}
+          />
+        </div>
+        <div className={classes.actions}>
+          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
+            Login
+          </Button>
+        </div>
+      </form>
+    </Card>
+  );
+};
+
+export default Login;
+```
+
+## useReducer()
+
+Manage more complex states (multiple states).
+
+Example of use: when updating a state that depends on another state
+
+```javascript
+const [state, dispatchFn] = useReducer(reducerFn, initialState, initFn);
+```
+
+state = the state snapshot used in the component re-render/re-evaluation cycle;
+dispatchFn = a function that can be used to dispatch a new action (ex: trigger an update of the state);
+reducerFn = a function that is triggered automatically once an action is dispatched (via dispatchFn()) it
+receives the latest state snapshot and should return the new, updated state;
+initialState = the initial state;
+initFn = a function to set the initial state programmatically;
+
 ## SETUP ENVIRONMENT
 
 <ul>
