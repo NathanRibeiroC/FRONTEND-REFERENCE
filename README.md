@@ -1912,7 +1912,202 @@ const Navigation = () => {
 };
 ```
 
+## useImperativeHandle
 
+Can be used to pass a ref to it's parent.
+
+On the example below the objective was to focus on the component,
+that was not valid
+
+CHILD COMPONENT
+```javascript
+import React, { useEffect, useRef, useImperativeHandle } from 'react';
+import classes from './Input.module.css';
+
+const Input = React.forwardRef((props, ref) => {
+    const inputRef = useRef();
+
+    const activate = () => {
+        inputRef.current.focus();
+    };
+
+    useImperativeHandle(ref,()=>{
+        return{
+            //focus could have been anyname, this is only a translation object, to communicate with outside world
+            focus: activate
+        };
+    });
+
+    return (
+        <React.Fragment>
+        <div
+          className={`${classes.control} ${
+            props.inputState.isValid === false ? classes.invalid : ''
+          }`}
+        >
+          <label htmlFor={props.htmlFor}>E-Mail</label>
+          <input
+            ref={inputRef}
+            type={props.type}
+            id={props.id}
+            value={props.inputState.value}
+            onChange={props.inputChangeHandler}
+            onBlur={props.validateInputHandler}
+          />
+        </div>
+        </React.Fragment>
+    );
+});
+
+export default Input;
+```
+
+PARENT COMPONENT
+```javascript
+import React, { useState, useEffect, useReducer, useRef } from "react";
+
+import Card from "../UI/Card/Card";
+import classes from "./Login.module.css";
+import Button from "../UI/Button/Button";
+import Input from "../Input/Input";
+
+const emailReducer = (state, action) => {
+  if (action.type === "USER_INPUT") {
+    return { value: action.val, isValid: action.val.includes("@") };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return { value: state.value, isValid: state.value.includes("@") };
+  }
+  return { value: "", isValid: false };
+};
+
+const passwordReducer = (state, action) => {
+  if (action.type === "USER_INPUT") {
+    return { value: action.val, isValid: action.val.trim().length > 6 };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return { value: state.value, isValid: state.value.trim().length > 6 };
+  }
+  return { value: "", isValid: false };
+};
+
+const Login = (props) => {
+  // const [enteredEmail, setEnteredEmail] = useState('');
+  // const [emailIsValid, setEmailIsValid] = useState();
+  // const [enteredPassword, setEnteredPassword] = useState('');
+  // const [passwordIsValid, setPasswordIsValid] = useState();
+  const [formIsValid, setFormIsValid] = useState(false);
+
+  const [emailState, dispatchEmail] = useReducer(emailReducer, {
+    value: "",
+    isValid: null,
+  });
+  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+    value: "",
+    isValid: null,
+  });
+
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+
+  useEffect(() => {
+    console.log("EFFECT RUNNING");
+
+    return () => {
+      console.log("EFFECT CLEANUP");
+    };
+  }, []);
+
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("Checking form validity!");
+      setFormIsValid(emailIsValid && passwordIsValid);
+    }, 500);
+
+    return () => {
+      console.log("CLEANUP");
+      clearTimeout(identifier);
+    };
+  }, [emailIsValid, passwordIsValid]);
+
+  const emailChangeHandler = (event) => {
+    dispatchEmail({ type: "USER_INPUT", val: event.target.value });
+
+    // setFormIsValid(
+    //   event.target.value.includes('@') && passwordState.isValid
+    // );
+  };
+
+  const passwordChangeHandler = (event) => {
+    dispatchPassword({ type: "USER_INPUT", val: event.target.value });
+
+    // setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
+  };
+
+  const validateEmailHandler = () => {
+    dispatchEmail({ type: "INPUT_BLUR" });
+  };
+
+  const validatePasswordHandler = () => {
+    dispatchPassword({ type: "INPUT_BLUR" });
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    if (formIsValid) {
+      props.onLogin(emailState.value, passwordState.value);
+    } else if (!emailIsValid) {
+      emailInputRef.current.focus();
+    } else {
+      passwordInputRef.current.focus();
+    }
+  };
+
+  return (
+    <Card className={classes.login}>
+      <form onSubmit={submitHandler}>
+        <Input
+          ref={emailInputRef}
+          id={"email"}
+          type={"email"}
+          htmlFor={"email"}
+          inputState={emailState}
+          inputChangeHandler={emailChangeHandler}
+          validateInputHandler={validateEmailHandler}
+        />
+        <Input
+          ref={passwordInputRef}
+          id={"password"}
+          type={"password"}
+          htmlFor={"password"}
+          inputState={passwordState}
+          inputChangeHandler={passwordChangeHandler}
+          validateInputHandler={validatePasswordHandler}
+        />
+        <div className={classes.actions}>
+          <Button type="submit" className={classes.btn}>
+            Login
+          </Button>
+        </div>
+      </form>
+    </Card>
+  );
+};
+
+export default Login;
+```
+
+## RULES OF HOOKS
+
+<ul>
+  <li>All start with "use"</li>
+  <li>Only call React Hooks in React Functions (React Component Functions, Custom Hooks)</li>
+  <li>Only call React Hooks at the Top Level (don't call them in nested functions [inside other hook], don't call them in any block statements [if])</li>
+  <li>On useEffect() every data that is coming from inside the component must be added as dependency</li>
+</ul>
 
 ## SETUP ENVIRONMENT
 
