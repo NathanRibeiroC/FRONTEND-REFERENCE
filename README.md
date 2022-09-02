@@ -8,6 +8,7 @@ This repository is a personal reference for React concepts and snippets of code 
 <p align="center">
  <a href="https://reactjs.org/docs/composition-vs-inheritance.html">React Oficial Docummentation</a> •
  <a href="https://www.youtube.com/watch?v=sjrW74Hx5Po&t=811s&ab_channel=FabioAkita">Setup Configuration</a>
+ <a href="https://github.com/necolas/normalize.css/">CSS Normalize</a>
 </p>
 
 ## SUMMARY
@@ -2115,3 +2116,18 @@ export default Login;
   <li><a href="https://github.com/yuk7/ArchWSL">ArchWSL</a></li>
   <li><a href="https://githubcomLeDragoXWin-Debloat-Tools">Win-Debloat-Tools<a></li>
 </ul>
+
+## SETUP PROJECT
+
+### Vite
+
+To create app:
+`npm create vite@latest`
+
+Navigate to folder, with the name especified on vite template creation
+
+`npm install`
+
+### CSS NORMALIZE
+
+<a href="https://github.com/necolas/normalize.css/">ArchWSL</a>
