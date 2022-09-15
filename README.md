@@ -1573,7 +1573,7 @@ const [state, dispatchFn] = useReducer(reducerFn, initialState, initFn);
 ```
 
 state = the state snapshot used in the component re-render/re-evaluation cycle;
-dispatchFn = a function that can be used to dispatch a new action (ex: trigger an update of the state);
+dispatchFn = a function that can be used to dispatch a new action (ex: trigger an update of the state)(can be any action you want);
 reducerFn = a function that is triggered automatically once an action is dispatched (via dispatchFn()) it
 receives the latest state snapshot and should return the new, updated state;
 initialState = the initial state;
@@ -2101,6 +2101,127 @@ const Login = (props) => {
 export default Login;
 ```
 
+## REACT IN DEPTH
+
+<img src="./IMGS/react_in_depth.jpeg">
+
+Re-rendering (changes real dom only for differences between evalutaions) !== of re-evaluating (after props, state or context changes)
+
+<img src="./IMGS/dom_dif.jpeg">
+
+### React.memo() and useMemo
+
+CURIOSITY: IS RELATED WITH HOC (HIGH ORDER COMPONENT - FUNCTION THAT RECEIVES A COMPONENT AND RETURNS A COMPONENT)
+
+From the example above, we can see the major differences between React.memo() and useMemo():
+
+<ul>
+  <li>React.memo() is a higher-order component that we can use to wrap components that we do not want to re-render unless props within them change</li>
+  <li>useMemo() is a React Hook that we can use to wrap functions within a component. We can use this to ensure that the values within that function are re-computed only when one of its dependencies change</li>
+</ul>
+
+DANGER: Using this everytime, this values also for useCallback forces your application to keep storing cache everytime so
+it is not recommended to use it where it is not necessary. The recommendation is to use high complexity functions.
+
+Can be also used with useEffect. (useMemo)
+
+Compara prevProps com currentProps, se são iguais, não renderiza o componente novamente. (React.memo())
+
+Recommended for parent components that have a large chain of sons, so if you know that when the parent changes,
+child will rerun anyway not being affected by props changes, so React.memo() is a good option to save performance.
+
+Only evaluates props.
+
+```javascript
+const getItems = useMemo(()=>{
+  return [number, number+1, number+2]
+},[number])
+
+//can also be used this way if the object or array doesn't change
+const getItems = useMemo(()=>{
+  return {'item1':'apple','item2':'orange'}
+},[])
+```
+
+#### useCallback
+
+Used together with React Memo and useEffect
+
+Primitive comparison in JS are true
+
+But objects and array are not true
+
+What useCallback will do is
+
+useMemo is less used as useCallback, because it is more useful to bring a closure than memorizing data
+just like it is done with useMemo
+
+```javascript
+{'a':1} === {'a':1}
+false
+
+1 === 1
+true
+
+'' === ''
+true
+
+"" === ""
+true
+
+[] === []
+false
+
+-----------------------
+
+let obj1 = {};
+let obj2 = {};
+
+obj1 === obj2;
+false
+
+//obj2 has the same address as obj1
+obj2 = obj1;
+
+obj1 === obj2;
+true
+```
+
+Every time a js function is ran, it is created in the memory, what use callback does is save the execution
+and only creates a new one on memory when the dependency of that function updates
+
+```javascript
+  //on this example below getItems is set to the entire function as also to it's lexical content
+const getItems = useCallback(()=>{
+  return [number, number+1, number+2]
+},[number])
+
+  //on this example below getItems is set only to the return value
+const getItems = useMemo(()=>{
+  return [number, number+1, number+2]
+},[number])
+```
+
+##### Closure
+Closure is the combination of a function and it's lexical environment (all the variables that surround an inner function)
+
+When you have a function defined within another function, the inner function will have access to the outer function variables, 
+even if the outer function has finished to execute.
+
+```javascript
+function makeAdder(x) {
+  return function(y) {
+    return x + y;
+  };
+}
+
+var add5 = makeAdder(5); //add5 is now a closure, has access to makeAdder and it's lexical content
+var add10 = makeAdder(10);
+
+print(add5(2));  // 7
+print(add10(2)); // 12
+```
+
 ## RULES OF HOOKS
 
 <ul>
@@ -2109,6 +2230,35 @@ export default Login;
   <li>Only call React Hooks at the Top Level (don't call them in nested functions [inside other hook], don't call them in any block statements [if])</li>
   <li>On useEffect() every data that is coming from inside the component must be added as dependency</li>
 </ul>
+
+## STATE
+
+When a component is unattached from the DOM state variable is not maintained by React. While the component is attached,
+the state variable is only created after the first time, the component is attached.
+
+When you set a state in React, the state will be scheduled, to be updated, won't be updated immediatly it will be necessary
+to wait for the component to re-render again in order you have the latest version of that state.
+
+Because of that when we need to update a react state based on a previous one it is necessary to use something just like:
+
+```javascript
+setUpdateState((prevstate) => !prevstate);
+```
+
+What also is used to increase performance is use state batch to update all the states on the same batch
+because of that it is common to update multiple states at the same function, as an example.
+
+```javascript
+function setState(){
+  setUpdateState((prevstate) => !prevstate);
+  setUpdateState((prevstate) => !prevstate);
+}
+```
+
+## DESTRUCTURING
+
+Elegant way to unpack value from a prop
+
 
 ## SETUP ENVIRONMENT
 
