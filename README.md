@@ -143,6 +143,63 @@ Class components should always call the base constructor with props.
 root.render(<Clock />);
 ```
 
+<img src="./IMGS/class_component.png">
+
+Class components usually are used to make error boundaries
+
+## Error boundaries
+
+Not possible using functional components.
+
+```javascript
+//THROW EXCEPTION INSIDE SOME COMPONENT
+    if (this.props.users.length === 0) {
+      throw new Error('No users provided!');
+    }
+```
+
+```javascript
+//CREATE ERROR BOUNDARY COMPONENT
+import { Component } from 'react';
+
+class ErrorBoundary extends Component {
+  constructor() {
+    super();
+    this.state = { hasError: false };
+  }
+
+  componentDidCatch(error) {
+    console.log(error);
+    this.setState({ hasError: true });
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <p>Something went wrong!</p>;
+    }
+    return this.props.children;
+  }
+}
+
+export default ErrorBoundary;
+```
+
+```javascript
+//INSIDE YOU RENDER METHOD WRAPPER PARENT COMPONENT WITHIN <ErrorBoundary> tag
+  render() {
+    return (
+      <Fragment>
+        <div className={classes.finder}>
+          <input type='search' onChange={this.searchChangeHandler.bind(this)} />
+        </div>
+        <ErrorBoundary>
+          <Users users={this.state.filteredUsers} />
+        </ErrorBoundary>
+      </Fragment>
+    );
+  }
+```
+
 ## Adding lifecycle methods to a class
 
 In applications with many components, it’s very important to free up resources taken by the components when they are destroyed.
@@ -242,6 +299,7 @@ root.render(<Clock />);
 ```
 
 The only place where you can assign this.state is the constructor.
+
 
 ## Set State Updates May Be Asynchronous
 
@@ -1561,6 +1619,12 @@ const Login = (props) => {
 
 export default Login;
 ```
+
+## Make requests
+
+### Database Interaction
+
+### Http Requests & Using Responses
 
 ## useReducer()
 
