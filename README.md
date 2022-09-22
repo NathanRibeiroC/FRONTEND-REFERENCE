@@ -9,6 +9,11 @@ This repository is a personal reference for React concepts and snippets of code 
  <a href="https://reactjs.org/docs/composition-vs-inheritance.html">React Oficial Docummentation</a> •
  <a href="https://www.youtube.com/watch?v=sjrW74Hx5Po&t=811s&ab_channel=FabioAkita">Setup Configuration</a> •
  <a href="https://github.com/necolas/normalize.css/">CSS Normalize</a>
+ <a href="https://www.typescriptlang.org/docs/handbook/intro.html">Typescript Handbook</a>
+ <a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS">CSS Main Reference</a>
+ <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JS Main Reference</a>
+ <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">Markup Main Reference</a>
+ <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP">HTTP Main Reference</a>
 </p>
 
 ## SUMMARY
@@ -1623,6 +1628,48 @@ export default Login;
 ## Make requests
 
 ### Database Interaction
+
+Web app should never interact directly with database, because it is quite insecure. It would expose
+your database credentials in the code, this is done by some backend app, users will never have access
+to it once it is on a different server.
+
+```javascript
+  //WITHOUT async or await
+  function fetchMovieHandler() {
+    fetch('https://swapi.dev/api/films/').then(response => {
+      return response.json();
+    }).then(data => {
+      const transformedMovies = data.results.map(movieData => {
+        return {
+          id: movieData.episode_id,
+          title: movieData.title,
+          openingText: movieData.opening_crawl,
+          releaseDate: movieData.release_date
+        };
+      });
+      setMovies(transformedMovies);
+    });
+  }
+```
+
+```javascript
+  //WITH async or await
+    async function fetchMovieHandler() {
+    const response = await fetch('https://swapi.dev/api/films/');
+    const data = await response.json();
+    
+    const transformMovies = data.results.map((movieData) => {
+      return {
+        id: movieData.episode_id,
+        title: movieData.title,
+        openingText: movieData.opening_crawl,
+        releaseDate: movieData.release_date
+      };
+    });
+
+    setMovies(transformMovies);
+    }
+```
 
 ### Http Requests & Using Responses
 
