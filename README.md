@@ -8,11 +8,11 @@ This repository is a personal reference for React concepts and snippets of code 
 <p align="center">
  <a href="https://reactjs.org/docs/composition-vs-inheritance.html">React Oficial Docummentation</a> •
  <a href="https://www.youtube.com/watch?v=sjrW74Hx5Po&t=811s&ab_channel=FabioAkita">Setup Configuration</a> •
- <a href="https://github.com/necolas/normalize.css/">CSS Normalize</a>
- <a href="https://www.typescriptlang.org/docs/handbook/intro.html">Typescript Handbook</a>
- <a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS">CSS Main Reference</a>
- <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JS Main Reference</a>
- <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">Markup Main Reference</a>
+ <a href="https://github.com/necolas/normalize.css/">CSS Normalize</a> •
+ <a href="https://www.typescriptlang.org/docs/handbook/intro.html">Typescript Handbook</a> •
+ <a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS">CSS Main Reference</a> •
+ <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JS Main Reference</a> •
+ <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">Markup Main Reference</a> •
  <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP">HTTP Main Reference</a>
 </p>
 
