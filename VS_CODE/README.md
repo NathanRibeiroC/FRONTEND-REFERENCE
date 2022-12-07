@@ -4,4 +4,4 @@ zoom + :
 CTRL + SHIFT + "+"
 
 zoom - :
-CTRL + SHIFT + "-"
+CTRL + SHIFT + "-".;.sadasdasd

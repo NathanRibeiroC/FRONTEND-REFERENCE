@@ -1474,6 +1474,8 @@ how to maintain user logged after first login, after user access site again.
 ```javascript
 import React, { useState, useEffect } from 'react';
 
+//use effect can`t be an async function
+
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import MainHeader from './components/MainHeader/MainHeader';
@@ -1665,6 +1667,24 @@ good practice is using useCallback
   useEffect(() => {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
+
+  //example response data not returning, promise to useEffect
+  // promise can`t be handled by try catch it is necessary to add fetchMeals.fetch()
+  useEffect(()=>{
+    const fetchMeals = async () => {
+      const response = await fetch('your url.com');
+      const responseData = await response.json();
+
+      const loadedMeals = [];
+
+      for(const key in responseData){
+        loadedMeals.push({
+          id: key,
+          name: respondeData[key].name,
+        })
+      }
+    }
+  })
 ```
 
 ### Database Interaction
@@ -2373,6 +2393,36 @@ print(add5(2));  // 7
 print(add10(2)); // 12
 ```
 
+## REDUX
+
+Local State
+
+  State that belongs to a single component
+  Should be managed internally with useState() / useReducer()
+  Ex: toggle something in the UI (show more, etc)
+
+Cross-Component State 
+
+  State that affects multiple components
+  Requires "props chains" "prop drilling"
+  Ex: open close modal overlay
+
+App-Wide State
+
+  State that affects the entire app
+  Requires props chains as also
+  Ex: user auth status
+
+React Context Disadvantages:
+
+  Complex setup / Management
+  In more complex apps, managing React Context
+  can lead to deeply nested JSX code 
+  and / or huge "Context Provider" components
+
+  Performance, not optimized for 
+  high-frequency state changes
+  
 ## CUSTOM HOOKS
 
 Unlike "regular functions", custom hooks can use other React hooks and React state.
