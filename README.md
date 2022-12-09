@@ -2422,7 +2422,52 @@ React Context Disadvantages:
 
   Performance, not optimized for 
   high-frequency state changes
-  
+
+Reducer --> (Changes data) Central Data --> (Subscription) Component --> Action --> (Dispatches) --> Reducer
+
+Example code: CHAP18/src/components/Counter
+Example code: CHAP18/src/components/store/
+
+VERY IMPORTANT: Should never change state on reduce, instead overwrite the value
+OBS: on reduce toolkit it is allowed, because it already makes internally the overwrite
+
+VERY IMPORTANT: Reducers must be pure, side-effect free (not sending HTTP request or other sync tasks), SYNCHRONOUS FUNCTIONS
+
+OBS: We can use components to handle it or ACTION CREATORS
+
+Example code: CHAP19/src/store
+
+VERY IMPORTANT: WHERE SHOULD SIDE-EFFECTS AND ASYNC TASKS BE EXECUTED
+
+1 - Inside components (useEffect())
+
+2 - Inside action creators
+
+Example code: CHAP19/src/store/car-actions.js
+
+SYNC CODE
+
+1 - Use reducers and avoid action creators or components
+
+## SPA Routing
+
+Multiple pages in Single Pages Applications
+
+<Link> tag, switch between pages without making http requests
+Example code: CHAP20-REACT-ROUTER\src\components\layout\MainNavigation.js
+
+Programatic navigation, when a form is submited as an example, auto redirect to some page:
+
+CHAP20-REACT-ROUTER\src\pages\NewQuote.js
+
+Exact, once a url is exactly matched get in:
+
+CHAP20-REACT-ROUTER\src\App.js
+
+Warning if user tries to navigate away and started entering data:
+
+CHAP20-REACT-ROUTER\src\components\quotes\QuoteForm.js
+
 ## CUSTOM HOOKS
 
 Unlike "regular functions", custom hooks can use other React hooks and React state.
@@ -2466,6 +2511,10 @@ function setState(){
   setUpdateState((prevstate) => !prevstate);
 }
 ```
+
+## EXTENSIONS
+
+Redux dev tools
 
 ## DESTRUCTURING
 
