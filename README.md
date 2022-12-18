@@ -1634,6 +1634,12 @@ export default Login;
 When using external state inside function that is fetching data and being used on useEffect
 good practice is using useCallback
 
+When the function that sends the request is used as parameter on useeffect, so useCallback should wrap the
+request
+
+Example of function been cached when passed as parameter to useEffect using useCallback 
+CHAP22-AUTHENTICATION\code\src\store\auth-context.js
+
 ```javascript
   const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
@@ -2460,6 +2466,10 @@ Programatic navigation, when a form is submited as an example, auto redirect to 
 
 CHAP20-REACT-ROUTER\src\pages\NewQuote.js
 
+More readable example history.push()
+
+CHAP20-REACT-ROUTER\src\components\quotes\QuoteList.js
+
 Exact, once a url is exactly matched get in:
 
 CHAP20-REACT-ROUTER\src\App.js
@@ -2467,6 +2477,16 @@ CHAP20-REACT-ROUTER\src\App.js
 Warning if user tries to navigate away and started entering data:
 
 CHAP20-REACT-ROUTER\src\components\quotes\QuoteForm.js
+
+useLocation() hook, gives information regarding the loaded page 
+
+CHAP20-REACT-ROUTER\src\components\quotes\QuoteList.js
+
+useRouteMatch gets even more info regarding the page, not necessary to adjust the parent routes
+
+CHAP20-REACT-ROUTER\src\pages\QuoteDetail.js
+
+HINT: HAVE ALL ROUTES DEFINED UNDER App.js
 
 ## CUSTOM HOOKS
 
@@ -2548,6 +2568,19 @@ To create app:
 Navigate to folder, with the name especified on vite template creation:
 `npm install`
 
+To run 
+`npm run dev`
+
 ### CSS NORMALIZE OR RESET
 
 <a href="https://github.com/necolas/normalize.css/">normalize.css</a>
+
+### CHECK FOR UPDATES
+
+`npm-check-updates`
+
+### TEST
+
+When testing requests look that who sends the request is THE BROWSER,
+not our application, so we want to test if our app went sucessfull after
+sending the request, because of that we usually mock it under the test class
